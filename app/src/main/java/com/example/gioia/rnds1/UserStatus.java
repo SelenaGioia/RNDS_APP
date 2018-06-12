@@ -1,11 +1,28 @@
 package com.example.gioia.rnds1;
 
+import java.util.List;
+
 public class UserStatus {
+    private String userID;
     private String userName;
+    private String currentStatusID;
     private String currentStatus;
-    private String availableStates;
-    private int noiseLevel;
-    private boolean isDisturbing;
+    private Integer disturbing;
+   // private List<String> availableStates;
+    private Integer noiseLevel;
+
+
+    public String getCurrentStatusID() {
+        return currentStatusID;
+    }
+
+    public void setCurrentStatusID(String currentStatusID) {
+        this.currentStatusID = currentStatusID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
 
     public String getUserName() {
         return userName;
@@ -23,27 +40,19 @@ public class UserStatus {
         this.currentStatus = currentStatus;
     }
 
-    public String getAvailableStates() {
-        return availableStates;
-    }
-
-    public void setAvailableStates(String availableStates) {
-        this.availableStates = availableStates;
-    }
-
-    public int getNoiseLevel() {
+    public Integer getNoiseLevel() {
         return noiseLevel;
     }
 
-    public void setNoiseLevel(int noiseLevel) {
+    public void setNoiseLevel(Integer noiseLevel) {
         this.noiseLevel = noiseLevel;
     }
 
-    public boolean isDisturbing() {
-        return isDisturbing;
+    public Integer isDisturbing() {
+        return disturbing;
     }
 
-    public void setDisturbing(boolean disturbing) {
-        isDisturbing = disturbing;
+    public void setDisturbing(Integer disturbing) {
+        disturbing = disturbing;
     }
 }
