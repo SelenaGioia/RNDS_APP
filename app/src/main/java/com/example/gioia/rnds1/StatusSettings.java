@@ -77,7 +77,8 @@ public class StatusSettings extends AppCompatActivity {
                     Status_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                         @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        //public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, String id) {
                             final Statuses selected = (Statuses) parent.getItemAtPosition(position);
                             ////
                             new AsyncTask<Void, Void, UserSettings>() {
@@ -85,8 +86,7 @@ public class StatusSettings extends AppCompatActivity {
                                 @Override
                                 protected UserSettings doInBackground(Void... voids) {
                                     try {
-                                        MyHttpRequest.getUserSettings(selected.statusID);
-                                        return null;
+                                        return MyHttpRequest.getUserSettings(selected.statusID);
                                     } catch (Throwable t) {
                                         t.printStackTrace();
                                         return null;
@@ -153,13 +153,28 @@ public class StatusSettings extends AppCompatActivity {
                     protected UserSettings doInBackground(Void... voids) {
                         try {
                             UserSettings userSettings2 = new UserSettings();
-                           // userSettings2.setCustomisedDescription(StatusDesc.getText().toString());
-                            //userSettings2.setStateID(String stateID);
-                            //userSettings2.setWindowsOpen(Integer windowsOpen);
-                            //userSettings2.setDoorOpen(Integer doorOpen);
-                            //userSettings2.setLightsOn(Integer lightsOn);
-                            //userSettings2.setNoiseLevel(Integer noiseLevel);
-                            //userSettings2.setCustomisedDescription(String customisedDescription);
+                            //set id
+                            userSettings2.setStateID(Status_Spinner.getSelectedItemId());
+                            //set description
+                            userSettings2.setCustomisedDescription(StatusDesc.getText().toString());
+                            //set door
+                            if(Doors.isChecked() == true)
+                                userSettings2.setDoorOpen(1);
+                            else
+                                userSettings2.setDoorOpen(0);
+                            //set WINDOWS check
+                            if(Windows.isChecked() == true)
+                                userSettings2.setWindowsOpen(1);
+                            else
+                                userSettings2.setWindowsOpen(0);
+                            //set LIGHTS check
+                            if(Lights.isChecked() == true)
+                                userSettings2.setLightsOn(1);
+                            else
+                                userSettings2.setLightsOn(0);
+                            //set noise
+                            userSettings2.setNoiseLevel(Noise.getProgress());
+                            //put data into server
                             MyHttpRequest.putUserSettings(userSettings2);
                             return null;
                         } catch (Throwable t) {
